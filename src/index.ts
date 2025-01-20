@@ -1,10 +1,13 @@
 import express from "express"
 import "dotenv/config"
 import { router } from "./routes/auth"
+import connectDB from "./config/databse"
 require("dotenv").config()
 
 const app = express()
 const PORT = process.env.PORT
+
+connectDB()
 
 app.get("/", (req, res) => {
   res.send("Hello")
