@@ -1,8 +1,9 @@
+import { registerUser } from "../controllers/authController"
 import express from "express"
 const router = express.Router()
 
-router.post("/register", (req, res) => {
-  res.send("Register")
-})
+router.post("/register", )
+
+router.post("/login",)
 
 export { router }
