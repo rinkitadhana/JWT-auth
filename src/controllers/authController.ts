@@ -2,17 +2,18 @@ import { Request, Response } from "express"
 import User, { IUser } from "../models/user"
 import bcrypt from "bcryptjs"
 import dotenv from "dotenv"
-import { errorHandler } from "utils/errorHandler"
-import { generateJWT } from "utils/jwtUtils"
+import { errorHandler } from "../utils/errorHandler"
+import { generateJWT } from "../utils/jwtUtils"
 dotenv.config()
 
-const registerUser = async (req: Request, res: Response) => {
+const registerUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { username, email, password } = req.body
 
     const existUser = await User.findOne({ email })
     if (existUser) {
-      return res.status(400).json({ message: "User already exists!" })
+      res.status(400).json({ message: "User already exists!" })
+      return
     }
 
     const salt = await bcrypt.genSalt(10)
@@ -31,7 +32,7 @@ const registerUser = async (req: Request, res: Response) => {
   }
 }
 
-const loginUser = async (req: Request, res: Response) => {
+const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { identifier, password } = req.body
 
@@ -40,12 +41,14 @@ const loginUser = async (req: Request, res: Response) => {
       : await User.findOne({ username: identifier })
 
     if (!user) {
-      return res.status(400).json({ message: "User not found!" })
+      res.status(400).json({ message: "User not found!" })
+      return
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid password!" })
+      res.status(400).json({ message: "Invalid password!" })
+      return
     }
     generateJWT(res, user._id as string)
     res.status(200).json({ message: "Login successful!" })
