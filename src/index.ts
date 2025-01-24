@@ -1,20 +1,23 @@
 import express from "express"
-import "dotenv/config"
+import dotenv from "dotenv"
 import { router } from "./routes/auth"
 import connectDB from "./config/database"
+import cookieParser from "cookie-parser"
 
-require("dotenv").config()
+dotenv.config()
+
 const app = express()
 const PORT = process.env.PORT
 
 connectDB()
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.get("/", (req, res) => {
-  res.send("Hello")
+  res.send("Hello China!")
 })
+
 app.use("/api", router)
 
 app.listen(PORT, () => {

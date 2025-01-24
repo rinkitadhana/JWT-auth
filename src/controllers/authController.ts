@@ -3,7 +3,7 @@ import User, { IUser } from "../models/user"
 import bcrypt from "bcryptjs"
 import dotenv from "dotenv"
 import { errorHandler } from "../utils/errorHandler"
-import { generateJWT } from "../utils/jwtUtils"
+import { clearJWT, generateJWT } from "../utils/jwtUtils"
 dotenv.config()
 
 const registerUser = async (req: Request, res: Response): Promise<void> => {
@@ -72,4 +72,13 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-export { registerUser, loginUser }
+const logoutUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    clearJWT(res)
+    res.status(200).json({ message: "Logout successful!" })
+  } catch (error) {
+    errorHandler(res, error)
+  }
+}
+
+export { registerUser, loginUser, logoutUser }
