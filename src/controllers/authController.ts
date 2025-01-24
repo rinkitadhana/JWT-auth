@@ -10,9 +10,19 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { username, email, password } = req.body
 
-    const existUser = await User.findOne({ email })
-    if (existUser) {
-      res.status(400).json({ message: "User already exists!" })
+    if (!username || !email || !password) {
+      res.status(400).json({ message: "Missing credentials" })
+      return
+    }
+
+    const existingEmail = await User.findOne({ email })
+    const existingUsername = await User.findOne({ username })
+    if (existingEmail || existingUsername) {
+      res.status(400).json({
+        message: existingEmail
+          ? "Email already exists!"
+          : "Username already exists!",
+      })
       return
     }
 
@@ -36,9 +46,14 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { identifier, password } = req.body
 
+    if (!identifier || !password) {
+      res.status(400).json({ message: "Missing credentials" })
+      return
+    }
+
     const user: IUser | null = identifier.includes("@")
-      ? await User.findOne({ email: identifier })
-      : await User.findOne({ username: identifier })
+      ? await User.findOne({ email: identifier }).select("+password")
+      : await User.findOne({ username: identifier }).select("+password")
 
     if (!user) {
       res.status(400).json({ message: "User not found!" })
