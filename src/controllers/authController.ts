@@ -11,7 +11,7 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
     const { username, email, password } = req.body
 
     if (!username || !email || !password) {
-      res.status(400).json({ message: "Missing credentials" })
+      res.status(400).json({ message: "Missing credentials!" })
       return
     }
 
@@ -34,7 +34,6 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
       email,
       password: hashedPassword,
     })
-
     await newUser.save()
     res.status(201).json({ message: "User created successfully!" })
   } catch (error) {
