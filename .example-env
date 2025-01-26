@@ -1,0 +1,12 @@
+# Server Port
+PORT=3000
+
+# MongoDB Connection String
+MONGO_URI=""
+
+# JWT Configuration
+JWT_SECRET="YourSecretKey"
+JWT_EXPIRY="1h"
+
+# Node Environment
+NODE_ENV="development"
