@@ -1,8 +1,8 @@
 import { Response } from "express"
 import jwt from "jsonwebtoken"
 
-const JWT_SECRET = process.env.JWT_SECRET
-const JWT_EXPIRY = process.env.JWT_EXPIRY
+const JWT_SECRET = process.env.JWT_SECRET || "secret"
+const JWT_EXPIRY = process.env.JWT_EXPIRY || "1h"
 
 const generateJWT = (res: Response, userId: string) => {
   const token = jwt.sign({ userId }, JWT_SECRET, { expiresIn: JWT_EXPIRY })

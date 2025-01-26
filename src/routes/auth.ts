@@ -8,6 +8,9 @@ const router = express.Router()
 
 router.post("/register", registerUser)
 router.post("/login", loginUser)
+router.get("/login", (req, res) => {
+  res.send("Hello")
+})
 router.post("/logout", logoutUser)
 
-export { router }
+export default router
