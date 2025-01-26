@@ -1,8 +1,10 @@
 import express from "express"
 import dotenv from "dotenv"
-import { router } from "./routes/auth"
+import authRouter from "./routes/auth"
+import userRouter from "./routes/user"
 import connectDB from "./config/database"
 import cookieParser from "cookie-parser"
+import authenticateUser from "./middlewares/authMiddleware"
 
 dotenv.config()
 
@@ -18,8 +20,8 @@ app.get("/", (req, res) => {
   res.send("Hello China!")
 })
 
-app.use("/api", router)
-
+app.use("/api", authRouter)
+app.use("/api/user", authenticateUser, userRouter)
 app.listen(PORT, () => {
   console.log(`Listening on port http://localhost:${PORT}`)
 })
