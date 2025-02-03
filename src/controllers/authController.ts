@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import User, { IUser } from "../models/user"
+import User, { IUser } from "../models/userModel"
 import bcrypt from "bcryptjs"
 import dotenv from "dotenv"
 import { errorHandler } from "../utils/errorHandler"
