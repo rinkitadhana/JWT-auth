@@ -16,22 +16,22 @@
   "license": "ISC",
   "description": "Ready to use jwt-auth system",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/cookie-parser": "^1.4.8",
-    "@types/express": "^5.0.0",
-    "@types/mongoose": "^5.11.96",
-    "@types/node": "^22.10.7",
-    "nodemon": "^3.1.9",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^20.11.19",
+    "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/jsonwebtoken": "^9.0.7",
     "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.7",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.5"
+    "mongoose": "^8.1.3"
   }
 }
