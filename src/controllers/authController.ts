@@ -46,7 +46,7 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
     const { identifier, password } = req.body
 
     if (!identifier || !password) {
-      res.status(400).json({ message: "Missing credentials" })
+      res.status(400).json({ message: "Missing credentials!" })
       return
     }
 
